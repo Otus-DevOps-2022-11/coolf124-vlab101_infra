@@ -1,6 +1,5 @@
 #!/bin/bash
-sudo apt remove --autoremove mongodb-org
-sudo rm /etc/apt/sources.list.d/mongodb*.list
+sudo systemctl start dbus
 sudo apt update
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B
 sudo apt-get install apt-transport-https ca-certificates
