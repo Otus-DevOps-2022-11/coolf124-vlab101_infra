@@ -10,6 +10,7 @@ echo Finished Installing Git
 echo Clonning reddit monolit Repo
 git clone -b monolith https://github.com/express42/reddit.git
 echo Finished clonning monolit Repo
+systemctl enable mongod --now
 echo Install reddit
 cd reddit && bundle install
 echo Finished install repo
