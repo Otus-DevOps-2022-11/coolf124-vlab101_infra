@@ -21,5 +21,5 @@ someinternalhost_IP = 10.128.0.32
 #ssh -i ~/.ssh/appuser -J appuser@158.160.100.122 appuser@10.128.0.32
 
 # DZ 6 Yandex
-testapp_IP = 35.198.167.169
+testapp_IP = 158.160.98.154
 testapp_port = 9292

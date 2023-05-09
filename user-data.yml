@@ -1,0 +1,49 @@
+#cloud-config
+users:
+  - name: yc-user
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCTxawpTNdBN93mXUVXA3XYZkmWSpl9Z5hqbzTqE7Ig91qxJjrPLjHarz9Jvhie1MiEQuCuhb4Sb8ip9zteJqSetERZgrfTv2yxyB4bIR+CwlimI+OQRDRFq6wsSUPHUOBm5gzn+Ir+IDBQBrWWXXKSxGfZS3oWL+Ec5EaRABxQG5LSYu9PXsHgjehjdTb5SGp/P6XVsrjgQVONzJzT5zNK70EkDr/T7eIzwP7sarfX1O6ynMXi3jlgu7m8S+uBQyCij6YjuNdDLuCKaB9JMuAdxbKGiZiBYmc3RnpGaFX6ymBjMuRgiVNCvzvsbbKFIRtIvpu9GvxCNot6r8rZd0IZVygoqm05sn/YZPiR5/yw2dAm/4eAkxls3exQ7Blxf0ikmBjz01KeekhPmfnyhOIx9CFEu2XDpdJbD38FtAlDtNlcAyp0mJQcneuQYSgk0tVy1+8P2qh6GCq/D4J6QQlztoKTbcP3H1vmg3WV/zBXt1YBqlHIPKdL7XUrinwa3fU= appuser
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+    lock_passwd: false
+write_files:
+  - path: /home/yc-user/startup.sh
+    content: |
+         #!/bin/bash
+         echo Invoke install_ruby.sh
+         cd /home/yc-user
+         source ./install_ruby.sh
+         source ./install_mongodb.sh
+         source ./deploy.sh
+         HostKey /etc/ssh/ssh_host_ed25519_key
+  - path: /home/yc-user/install_ruby.sh
+    content: |
+         #!/bin/bash
+         sudo apt update
+         sudo apt install -y ruby-full ruby-bundler build-essential
+         ruby -v
+         bundler -v
+  - path: /home/yc-user/install_mongodb.sh
+    content: |
+         #!/bin/bash
+         wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+         sudo apt-get update
+         sudo apt-get install -y mongodb-org
+  - path: /home/yc-user/deploy.sh
+    content: |
+         #!/bin/bash
+         sudo systemctl enable mongod --now
+         cd /home/yc-user
+         sudo apt install -y git
+         git clone -b monolith https://github.com/express42/reddit.git
+         cd reddit && bundle install
+         puma -d
+         ps aux | grep puma
+runcmd:
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin yes/' /etc/ssh/sshd_config
+  - sed -i -e '$aAllowUsers yc-user' /etc/ssh/sshd_config
+  - restart ssh
+  - chmod +x /home/yc-user/startup.sh
+  - ./home/yc-user/startup.sh
