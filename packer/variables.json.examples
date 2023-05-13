@@ -1,0 +1,6 @@
+{
+  "my_folder_id": "b1gsge96testaqp37oe14",
+  "my_source_image_family": "ubuntu-1604-lts",
+  "my_subnet_id": "e9b5e7psatest36g4dfd",
+  "my_service_account_key_file": "/test/key.json"
+}
