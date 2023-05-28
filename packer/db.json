@@ -1,0 +1,28 @@
+{
+    "variables": {
+      "my_folder_id": "",
+      "my_source_image_family": "",
+      "my_service_account_key_file": ""
+    },
+      "builders": [
+          {
+              "type": "yandex",
+              "service_account_key_file": "{{user `my_service_account_key_file`}}",
+              "folder_id": "{{user `my_folder_id`}}",
+              "source_image_family": "{{user `my_source_image_family`}}",
+                "subnet_id":           "e9b5e7psacnrp36g4dfd",
+              "use_ipv4_nat":        true,
+              "image_name": "reddit-db-base-{{timestamp}}",
+              "image_family": "reddit-db-base",
+              "ssh_username": "ubuntu",
+              "platform_id": "standard-v1"
+          }
+      ],
+      "provisioners": [
+          {
+              "type": "shell",
+              "script": "scripts/install_mongodb.sh",
+              "execute_command": "sudo {{.Path}}"
+          }
+      ]
+  }
