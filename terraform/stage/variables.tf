@@ -31,19 +31,19 @@ variable "reddit_app_instance_count" {
   # Значение по умолчанию
   default = 1
 }
-variable app_disk_image {
+variable "app_disk_image" {
   description = "Disk image for reddit app"
-  default = "reddit-app-base"
+  default     = "reddit-app-base"
 }
-variable db_disk_image {
+variable "db_disk_image" {
   description = "Disk image for reddit db"
-  default = "reddit-db-base"
+  default     = "reddit-db-base"
 }
 
-variable s3_access_key {
+variable "s3_access_key" {
   description = "S3 backend yandex key"
 }
 
-variable s3_secret_key {
+variable "s3_secret_key" {
   description = "S3 backend yandex key"
 }

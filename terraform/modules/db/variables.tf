@@ -15,7 +15,7 @@ variable "reddit_app_instance_count" {
   # Значение по умолчанию
   default = 1
 }
-variable db_disk_image {
+variable "db_disk_image" {
   description = "Disk image for reddit db"
-  default = "reddit-db-base"
+  default     = "reddit-db-base"
 }

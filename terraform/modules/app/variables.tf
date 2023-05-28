@@ -10,7 +10,13 @@ variable "reddit_app_instance_count" {
   # Значение по умолчанию
   default = 1
 }
-variable app_disk_image {
+variable "app_disk_image" {
   description = "Disk image for reddit app"
-  default = "reddit-app-base"
+  default     = "reddit-app-base"
+}
+
+variable "app_provisioner_count" {
+  description = "Provision or not reddit app inside vm"
+  # Значение по умолчанию
+  default = 1
 }
