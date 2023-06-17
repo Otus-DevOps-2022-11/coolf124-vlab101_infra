@@ -39,3 +39,16 @@ variable "db_disk_image" {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
 }
+
+variable "s3_access_key" {
+  description = "S3 backend yandex key"
+}
+
+variable "s3_secret_key" {
+  description = "S3 backend yandex key"
+}
+variable "app_provisioner_count" {
+  description = "Provision or not reddit app inside vm"
+  # Значение по умолчанию
+  default = 0
+}

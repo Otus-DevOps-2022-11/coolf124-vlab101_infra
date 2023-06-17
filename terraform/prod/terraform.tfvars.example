@@ -8,3 +8,6 @@ service_account_key_file = "/home/user/Documents/OTUS/key.json"
 private_key_path         = "~/.ssh/appuser"
 app_disk_image           = "test66nl99hoe0gllfql"
 db_disk_image            = "test6tfubadm1os6qpbe"
+s3_access_key		 = "testE4b5mXywVazmVxr8667t9"
+s3_secret_key		 = "test3VUnURUXaGxJPBOFYKvnqlJci0QS-9_WrdYa"
+app_provisioner_count    = 0
