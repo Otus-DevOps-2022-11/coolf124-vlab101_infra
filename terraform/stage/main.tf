@@ -7,8 +7,10 @@ provider "yandex" {
 module "app" {
   source          = "../modules/app"
   public_key_path = var.public_key_path
+  private_key_path = var.private_key_path
   app_disk_image  = var.app_disk_image
   subnet_id       = var.subnet_id
+  app_provisioner_count = var.app_provisioner_count
 }
 
 module "db" {

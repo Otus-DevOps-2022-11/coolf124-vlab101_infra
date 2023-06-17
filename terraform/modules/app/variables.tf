@@ -2,6 +2,10 @@ variable "public_key_path" {
   # Описание переменной
   description = "Path to the public key used for ssh access"
 }
+variable "private_key_path" {
+  # Описание переменной
+  description = "Path to the public key used for ssh access"
+}
 variable "subnet_id" {
   description = "Subnet"
 }
@@ -18,5 +22,5 @@ variable "app_disk_image" {
 variable "app_provisioner_count" {
   description = "Provision or not reddit app inside vm"
   # Значение по умолчанию
-  default = 1
+  default = 0
 }
