@@ -39,3 +39,8 @@ variable "db_disk_image" {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
 }
+variable "app_provisioner_count" {
+  description = "Provision or not reddit app inside vm"
+  # Значение по умолчанию
+  default = 0
+}
